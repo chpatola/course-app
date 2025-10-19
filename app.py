@@ -24,7 +24,7 @@ app.secret_key = 'your_very_secret_key_here' # Important for session management,
 
 # Database
 # https://flask-sqlalchemy.readthedocs.io/en/stable/config/ How the connection can be set, without using fgcloud lask_sqlalchemy
-app.config["SECRET_KEY"] = "yoursecretkey"
+# app.config["SECRET_KEY"] = "yoursecretkey"
 app.config["SQLALCHEMY_DATABASE_URI"]= f'mysql+pymysql://{access_secret("etl-test-404717","MYSQL_USER")}:{access_secret("etl-test-404717","MYSQL_PASSWORD")}@{access_secret("etl-test-404717","MYSQL_PUBLIC_IP_ADDRESS",version_id=4)}/{access_secret("etl-test-404717","MYSQL_DB",version_id=3)}'
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"]= False 
 app.config["INSTANCE_UNIX_SOCKET"] = "/cloudsql/etl-test-404717:europe-west3:course-app"
