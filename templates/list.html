@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Enrollment List</title>
+    <style>
+        table { width: 100%; border-collapse: collapse; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+    </style>
+</head>
+<body>
+    <h1>Enrollments</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Course Date</th>
+                <th>Enrollment Time</th>
+                <th>Comment</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for enrollment in list %}
+            <tr>
+                <td>{{ enrollment.id }}</td>
+                <td>{{ enrollment.first_name }}</td>
+                <td>{{ enrollment.last_name }}</td>
+                <td>{{ enrollment.email }}</td>
+                <td>{{ enrollment.course_date }}</td>
+                <td>{{ enrollment.enrollment_time }}</td>
+                <td>{{ enrollment.comment }}</td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="7">No enrollments found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

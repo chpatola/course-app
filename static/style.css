@@ -1,0 +1,108 @@
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+.container {
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
+    padding: 20px;
+    background-color: #fff;
+    min-height: 70vh;
+}
+
+nav {
+    background: #333;
+    color: #fff;
+    padding: 15px 0;
+    text-align: center;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    padding: 5px 15px;
+}
+
+nav a:hover {
+    background: #555;
+}
+
+h1 {
+    color: #333;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    background: #333;
+    color: #fff;
+    margin-top: 20px;
+}
+
+/* Form styles */
+form div {
+    margin-bottom: 15px;
+}
+
+form label {
+    display: inline-block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+form input[type="text"],
+form input[type="email"],
+form textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box; /* Important to include padding and border in the element's total width and height */
+}
+
+form button {
+    background-color: #5cb85c;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+form button:hover {
+    background-color: #4cae4c;
+}
+
+.success-message {
+    color: green;
+    border: 1px solid green;
+    padding: 10px;
+    margin-bottom: 15px;
+    background-color: #e6ffe6;
+}
+
+
+.responsive-car-image {
+    width: 500px; /* Set your desired width for the cropped image */
+    height: 200px; /* Set your desired height for the cropped image */
+    object-fit: cover; /* This will cover the area, cropping if necessary */
+    object-position: 50% 50%; /* Optional: Adjusts which part of the image is centered. E.g., 'top', 'bottom', '50% 25%' */
+    display: inline-block; /* Can help with layout and margin handling */
+    margin: 5px auto; /* Example margin, adjust as needed */
+}
+
+.enrollment-form {
+    background-color: #ffffff; /* White background to create a card effect */
+    padding: 30px;             /* Generous padding for content inside */
+    border-radius: 10px;       /* Softer, modern rounded corners */
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12); /* A shadow to make it "pop" off the page */
+    margin: 40px auto;         /* Adds space around the form and centers it horizontally */
+    max-width: 650px;          /* Prevents the form from becoming too wide on larger screens */
+    border: 1px solid #eaeaea; /* A light border to define the edges subtly */
+}

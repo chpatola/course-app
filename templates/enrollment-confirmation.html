@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Manda´s Driving School{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <h2>Thank you for your Enrollment!</h2>
+    The information you submitted:
+    <br>
+    <ul>
+        <li>Course Date: {{ submission_data.date}}</li>
+        <li> First Name: {{ submission_data.first_name}}</li>
+        <li> Last Name: {{ submission_data.last_name}}</li>
+        <li> Email: {{ submission_data.email}}</li>
+        <li> Comment: {{ submission_data.comment}}</li>
+    </ul>
+    <br>
+    <br>
+    Please give us a call at + 49 175 513 555 in case you have any questions or want to change your enrollment.
+
+    <br>
+
+    <h3><a href="/">Back to Homepage</a></h3>
+
+</body>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Manda´s Driving School{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <img src="{{ url_for('static', filename='images/car.jpg') }}" alt="Car" class="responsive-car-image"
+        title="Car image by Yunus Emre Ilıca from Pixabay ">
+
+
+    <div class="container">
+        <h1>Welcome to Manda´s Driving School!</h1>
+        <p>We start new courses every month </p>
+        <p>On the <b>first Monday</b> of the Month, you can join the course for driving licence for passanger car</p>
+        <p>On the <b>second Monday</b>of the Month, you can join the course for driving licence for lorries</p>
+
+        <h2>Enrol to a Course</h2>
+        <form action="/enrol" method="POST"> <!-- Replace # with your form submission URL -->
+            <div>
+                <label for="course_date">Select a Monday for your course:</label>
+                <input type="date" id="course_date" name="course_date" required>
+                <br>
+                <small>Please ensure the selected date is a Monday as per our course schedule.</small>
+            </div>
+            <div>
+                <label for="first_name">First Name:</label>
+                <input type="text" id="first_name" name="first_name" required>
+            </div>
+            <div>
+                <label for="last_name">Last Name:</label>
+                <input type="text" id="last_name" name="last_name" required>
+            </div>
+            <div>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div>
+                <label for="comment">Comment (Optional and max 500 characters):</label>
+                <textarea id="comment" name="comment" rows="4"></textarea>
+            </div>
+            <div>
+                <button type="submit">Submit Enrollment</button>
+            </div>
+        </form>
+
+
+    </div>
+
+    <p class="submission">{{ submission_data}}</p>
+
+
+
+
+
+</body>
+
+</html>
