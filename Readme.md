@@ -60,52 +60,6 @@ https://medium.com/@anukritj/a-step-by-step-guide-connecting-your-google-cloud-d
   * Read tutorials again and see if I really need a secretkey env varibale
   * In app, we are creating the student object like twice. Can we have it only once?
   * When everything works, we want to separate the database stuff to its own files. Like her https://github.com/chpatola/flask_db/blob/main/usermodule.py
-
-# try to deploy in gcp with a database
-* Google Info https://cloud.google.com/sql/docs/mysql/connect-app-engine-standard
-* There is one tutorial on Medium
-
-* Google suggest one use a ADC https://cloud.google.com/docs/authentication/set-up-adc-attached-service-account
-
-
-Suggestion 1: it say that "All apps in this project are authorized by default" -> try just to deployThen update the app https://cloud.google.com/appengine/docs/standard/nodejs/building-app/updating-web-service
-
-Suggestion 2: Is there not a way to manually pass env variables to the app? In heroku I just do heroku config:set SECRET_KEY=<yoursecretkeyhere> https://stackoverflow.com/questions/22669528/securely-storing-environment-variables-in-gae-with-app-yaml
-
-Suggestion 3: Try
- to access the secret manager and do it from there.
- Kolla om secret manager faktiskt gar att använda. Lägg in det tidigare i app o build. Försök se hur man hittar error messages within the app:
-
-Suggestion 4:
-Check if your connections string has the right format 
-# Config MySQL
-app.config['MYSQL_HOST'] = os.environ.get("MYSQL_HOST")
-app.config['MYSQL_UNIX_SOCKET'] = os.environ.get("MYSQL_UNIX_SOCKET")
-app.config['MYSQL_USER'] = os.environ.get("MYSQL_USER")
-app.config['MYSQL_PASSWORD'] = os.environ.get("MYSQL_PASSWORD")
-app.config['MYSQL_DB'] = os.environ.get("MYSQL_DB")
-app.config['MYSQL_CURSORCLASS'] = os.environ.get("MYSQL_CURSORCLASS")
-env_variables:
-# SQL Configuration
-MYSQL_UNIX_SOCKET: '/cloudsql/<GCP Project name>:<GCP region>:<Cloud SQL instance name>'
-MYSQL_USER: '<Insert Database username>'
-MYSQL_PASSWORD: '<insert Database password>'
-MYSQL_DB: '<insert Database name>'
-MYSQL_CURSORCLASS: 'DictCursor'
-MYSQL_HOST: '<insert Database I.P. Address>'
-# Google Keys
-GOOGLE_OAUTH_CLIENT_ID: ''
-GOOGLE_OAUTH_CLIENT_SECRET: ''
-# Facebook Keys
-FACEBOOK_OAUTH_CLIENT_ID: ''
-FACEBOOK_OAUTH_CLIENT_SECRET: ''
-# reCaptcha Keys
-RECAPTCHA_SITE_KEY: ''
-RECAPTCHA_SECRET_KEY: ''
-
-mysql = MySQL(app)
-
--> also see the alterantve database under tests
  
 
 

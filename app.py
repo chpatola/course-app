@@ -5,8 +5,8 @@ from google.cloud import secretmanager
 import os
 
 # Only for manual testing of the container
-credential_path = "auth/application_default_credentials.json"
-os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = credential_path
+#credential_path = "auth/application_default_credentials.json"
+#os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = credential_path
 
 
 # initialize Connector object
