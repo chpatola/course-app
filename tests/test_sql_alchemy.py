@@ -17,7 +17,7 @@ app = Flask(__name__)
 
 print("succes libraries and init of app")
 print(app)
-app.config["SQLALCHEMY_DATABASE_URI"]= f'mysql+pymysql://{access_secret("etl-test-404717","MYSQL_USER")}:{access_secret("etl-test-404717","MYSQL_PASSWORD")}@{access_secret("etl-test-404717","MYSQL_PUBLIC_IP_ADDRESS",version_id=3)}/{access_secret("etl-test-404717","MYSQL_DB",version_id=3)}'  
+app.config["SQLALCHEMY_DATABASE_URI"]= f'mysql+pymysql://{access_secret("etl-test-404717","MYSQL_USER")}:{access_secret("etl-test-404717","MYSQL_PASSWORD")}@{access_secret("etl-test-404717","MYSQL_PUBLIC_IP_ADDRESS",version_id=5)}/{access_secret("etl-test-404717","MYSQL_DB",version_id=3)}'  
 
 
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"]= False 
@@ -35,4 +35,13 @@ class course_enrollments(db.Model):
     email = db.Column(db.String(50), nullable = True)
     comment = db.Column(db.String(500), nullable = True)
     
-print("success course_enrollments object")    
+print("success course_enrollments object")
+
+def show_all_enrollments():
+    with app.app_context():
+        enrollments = course_enrollments.query.all()
+        for enrollment in enrollments:
+            print(f"ID: {enrollment.id}, Name: {enrollment.first_name} {enrollment.last_name}, Email: {enrollment.email}")
+
+if __name__ == "__main__":
+    show_all_enrollments()

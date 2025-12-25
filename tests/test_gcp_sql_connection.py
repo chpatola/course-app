@@ -1,38 +1,37 @@
+# If this works, we have to figure out how to use it in the app file with the object model
 from google.cloud.sql.connector import Connector
-# The outcommented lines are if using a local env file - instead of the secret manager - where the values are saved
-#from dotenv import load_dotenv  
-#load_dotenv()
 import sqlalchemy
-import os
-
 from google.cloud import secretmanager
 
+#Initiate secret manager object
 client = secretmanager.SecretManagerServiceClient()
 
+
+# initialize Connector object
 connector = Connector()
 
+# Function to access secrets
 def access_secret(project_id, secret_id, version_id=1):
     name = f"projects/{project_id}/secrets/{secret_id}/versions/{version_id}"
     response = client.access_secret_version(request={"name": name})
     return response.payload.data.decode("UTF-8")
 
-
-# initialize SQLAlchemy connection pool with Connector
-print("Initializing database connection pool")
-pool = sqlalchemy.create_engine(
-    "mysql+pymysql://",
-    creator=lambda: connector.connect(
+# function to return the database connection object
+def getconn():
+    conn = connector.connect(
         "etl-test-404717:europe-west3:course-app",
         "pymysql",
         user = access_secret("etl-test-404717","MYSQL_USER"),
         password = access_secret("etl-test-404717","MYSQL_PASSWORD"),
         db = access_secret("etl-test-404717","MYSQL_DB",version_id=3)
-        #user=os.environ.get("MYSQL_USER"),
-        #password=os.environ.get("MYSQL_PASSWORD"),
-        #db=os.environ.get("MYSQL_DB")
-    ),
-)
+    )
+    return conn
 
+# create connection pool with 'creator' argument to our connection object function
+pool = sqlalchemy.create_engine(
+    "mysql+pymysql://",
+    creator=getconn,
+)
 
 # insert statement
 insert_stm = sqlalchemy.text(
@@ -45,33 +44,27 @@ insert_stm = sqlalchemy.text(
     email,
     comment)
 VALUES
-  (144654651,
+  (4844654,
   now(),
     "2025-09-05",
     "Alla",
     "Iva",
     "eae_ii2@mail.com",
-    "Secret manager 3") """,
+    "Secret managbhjjhb") """,
 )
 
-print(insert_stm)
+# connect to connection pool
 with pool.connect() as db_conn:
 
-    print("Opening connection to database")
- 
-    # insert into database
-    db_conn.execute(insert_stm)
-    # commit transaction (SQLAlchemy v2.X.X is commit as you go)
-    db_conn.commit()
+  db_conn.execute(insert_stm)
 
-    # query database
-    result = db_conn.execute(sqlalchemy.text("SELECT * from course_app.course_enrollments")).fetchall()
-    
-    # Do something with the results
-    for row in result:
-        print(row)
+  # commit transaction (SQLAlchemy v2.X.X is commit as you go)
+  db_conn.commit()
 
 
+  # query and fetch ratings table
+  results = db_conn.execute(sqlalchemy.text("SELECT * from course_app.course_enrollments")).fetchall()
 
-
-    
+  # show results
+  for row in results:
+    print(row)

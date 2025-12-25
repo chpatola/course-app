@@ -7,5 +7,5 @@ def access_secret(project_id, secret_id, version_id=1):
     response = client.access_secret_version(request={"name": name})
     return response.payload.data.decode("UTF-8")
 
-secret_value = access_secret("etl-test-404717","MYSQL_PUBLIC_IP_ADDRESS",version_id=3)
+secret_value = access_secret("etl-test-404717","MYSQL_PUBLIC_IP_ADDRESS",version_id=5)
 print("Secret value:", secret_value)

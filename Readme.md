@@ -25,21 +25,30 @@ Use the virtual environment course_app in PS C:\Users\Ch_EP\OneDrive\Skrivbord\R
 * Open docker desktop to start the docker engine
 * In case you have made changes in the repo and need to update the image, do it with
 `docker build . -t course_app`
-* Create credentials with `auth application-default login` Go to the file and paste the content in the file named in application_default_credentials.json in the Repos/secrets folder
+* Create credentials with `gcloud auth application-default login` Go to the file and paste the content in the file named in application_default_credentials.json in the Repos/secrets folder
 * Start the container with 
 `docker run -it -v “C:\Users\Ch_EP\OneDrive\Skrivbord\Repos\secrets:/app/auth" -p 5000:5000 course_app`
 docker run  -it -p 5000:5000 course_app`
 
+## From Cloud Run
+### With GitHub
+
+1. Upload your repo to GitHub
+2. Go to Cloud Run in the GCP UI. Click on build from GitHub
+3. Follow the steps. For example with the help of https://medium.com/codex/continuously-deploying-a-flask-app-from-a-github-repository-to-google-cloud-run-6f26226539b0#
+4. When done, go to Triggers. Make sure the correct settings are here. Especially that the correct service account is chosen
+5. Go to Permissions and make sure the correct service account is also used there
+
+### With GCP Artefact
+1. Go to Artefact UI
+2. Click on create a new repository
+3. Fill in the info
+4. Run `gcloud auth configure-docker europe-west3-docker.pkg.dev` Exchange the region with your region
+5. Tag your local picture `docker build -t europe-west3-docker.pkg.dev/etl-test-404717/course-app/course-app:1.0.0 .`. Exchange the region, the project, the repo-name (from artefact repo name) and the image name
+6. Push it to GCP `docker push europe-west3-docker.pkg.dev/etl-test-404717/course-app/course-app:1.0.0`
+
 ## What to do next 
-0. Restore the SQL Database
-1. Make a new version of this repo where all stuff needed for App Engine is cleaned out
-2. Destroy the old course_app docker image
-3. Make sure the new repo deploys locally
-4. Create a new course_app image
-5. Make sure this new course app image runs normally locally
-6. Push it to GitHub
-7. Connect from GitHub to Cloud Run
-8. Follow the steps from the auomate cloud run deployment on Medium
+0. Figure out why the trigger from github does not work (when choosing our general service account, we get)
 
 
 
