@@ -18,10 +18,16 @@ The app can be spinned up locally or hosted in Google Cloud Run.
 ## Locally
 
 ### Without Docker
-Use the virtual environment course_app in PS C:\Users\Ch_EP\OneDrive\Skrivbord\Repos\environments>ls
-* Activate it with Scripts/activate
+Create a virtual environment 
+`python -m venv course_app`
+* cd into it and activate it with 
+`Scripts/activate`
+Install the packages in requirements.txt
+`pip install -r requirements.txt`
+Uncomment the CREDENTIAL_PATH lines in app.py
 
 ### With Docker
+* Uncomment the CREDENTIAL_PATH lines in app.py
 * Open docker desktop to start the docker engine
 * In case you have made changes in the repo and need to update the image, do it with
 `docker build . -t course_app`

@@ -14,7 +14,7 @@ def publish_message(data):
 enrollment_time = datetime.now().astimezone().isoformat()
 print(enrollment_time)
 course_date = "2025-09-05"
-first_name = "Seventeenth"
+first_name = "Eigteenth try"
 last_name = "Time with new table"
 email = "my_email@mail.com"
 comment = "I want to get to BigQuery"
