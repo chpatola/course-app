@@ -1,6 +1,6 @@
 # What this app does
 This is a flask app that hosts a course enrollment site for a traffic school.
-The - very simple - web page saved the enrollments to course in a MySQL instance hosted on Google Cloud.
+The - very simple - web page save the enrollments to course in a MySQL instance hosted on Google Cloud.
 The app is deployed with Docker and run in a Google CLoud Run instance.
 
 # How to use this app
@@ -48,8 +48,11 @@ docker run  -it -p 5000:5000 course_app`
 6. Push it to GCP `docker push europe-west3-docker.pkg.dev/etl-test-404717/course-app/course-app:1.0.0`
 
 ## What to do next 
-0. Figure out why the trigger from github does not work (when choosing our general service account, we get)
-
+0. Check which service account is associated with the pubsub stuff
+1. Make sure the service account that we use for the app has all the rights needed for the pubsub stuff
+3. Create a new env with much less packages and make sure that the current version of the app can run with that
+4. Add the pubsub stuff into the code and run the docker container with that locally
+5. Also figure out script to set up the pubsub stuff from the console (ask AI)
 
 
 

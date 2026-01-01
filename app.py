@@ -3,6 +3,7 @@ from google.cloud.sql.connector import Connector
 import sqlalchemy
 from google.cloud import secretmanager  
 import os
+from datetime import datetime
 
 # Only for manual testing of the container
 #credential_path = "auth/application_default_credentials.json"
@@ -60,6 +61,7 @@ def show_list():
 def enrol():
     """Handles the course enrollment form submission."""
     if request.method == 'POST':
+        enrollment_time = datetime.now()
         course_date = request.form.get('course_date')
         first_name = request.form.get('first_name')
         last_name = request.form.get('last_name')
@@ -70,12 +72,13 @@ def enrol():
         # Matches schema: id (autoincrement), enrollment_time (NOW), others nullable
         insert_stmt = sqlalchemy.text(
             """INSERT INTO course_enrollments (enrollment_time, course_date, first_name, last_name, email, comment)
-               VALUES (NOW(), :course_date, :first_name, :last_name, :email, :comment)"""
+               VALUES (:enrollment_time, :course_date, :first_name, :last_name, :email, :comment)"""
         )
         
         try:
             with pool.connect() as db_conn:
                 db_conn.execute(insert_stmt, parameters={
+                    "enrollment_time": enrollment_time,
                     "course_date": course_date,
                     "first_name": first_name,
                     "last_name": last_name,
