@@ -1,0 +1,12 @@
+gcloud pubsub subscriptions create course-app-sub-bq \
+    --topic=course-app-topic \
+    --bigquery-table=etl-test-404717.course_app.course_enrollments_raw \
+    --use-topic-schema \
+    --write-metadata \
+    --drop-unknown-fields \
+    --ack-deadline=10 \
+    --message-retention-duration=2d \
+    --expiration-period=31d \
+    --dead-letter-topic=course-app-topic-deadletter \
+    --max-delivery-attempts=5 \
+    --project=etl-test-404717

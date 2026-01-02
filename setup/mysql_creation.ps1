@@ -1,0 +1,16 @@
+gcloud sql instances create course-app \
+    --project=etl-test-404717 \
+    --database-version=MYSQL_8_4 \
+    --tier=db-perf-optimized-N2-2 \
+    --cpu=2 \
+    --memory=8GB \
+    --storage-type=SSD \
+    --storage-size=10GB \
+    --no-storage-auto-increase \
+    --region=europe-west3 \
+    --zone=europe-west3-a \
+    --assign-ip \
+    --enable-app-engine-auth \
+    --deletion-protection \
+    --no-backup \
+    --availability-type=zonal

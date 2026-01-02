@@ -3,6 +3,9 @@ This is a flask app that hosts a course enrollment site for a traffic school.
 The - very simple - web page save the enrollments to course in a MySQL instance hosted on Google Cloud.
 The app is deployed with Docker and run in a Google CLoud Run instance.
 
+The data from the app is written to a GCP mySQL instance and sent to a pubsub topic. From there, there is a 
+pubsub subscriber that reads the data from the topic and writes it to a GCP BigQuery table.
+
 # How to use this app
 The app can be spinned up locally or hosted in Google Cloud Run.
 
@@ -54,34 +57,16 @@ docker run  -it -p 5000:5000 course_app`
 6. Push it to GCP `docker push europe-west3-docker.pkg.dev/etl-test-404717/course-app/course-app:1.0.0`
 
 ## What to do next 
-0. Check which service account is associated with the pubsub stuff
-1. Make sure the service account that we use for the app has all the rights needed for the pubsub stuff
-3. Create a new env with much less packages and make sure that the current version of the app can run with that
-4. Add the pubsub stuff into the code and run the docker container with that locally
-5. Also figure out script to set up the pubsub stuff from the console (ask AI)
-
-
-
-# TUTORIALS i USE
-https://www.geeksforgeeks.org/sql/setting-up-google-cloud-sql-with-flask/
-https://medium.com/@anukritj/a-step-by-step-guide-connecting-your-google-cloud-database-to-flask-c8a7df9d7da5
-
-  * Read tutorials again and see if I really need a secretkey env varibale
-  * In app, we are creating the student object like twice. Can we have it only once?
-  * When everything works, we want to separate the database stuff to its own files. Like her https://github.com/chpatola/flask_db/blob/main/usermodule.py
+1. Plan what kind of transformations should be done to the raw data and what technology?
+2. Set up one transformation Job
+3. Create a few different outputports (unique Students, unique courses?, exams?)
+4. Set up dataplex / Data Catalouge
+5. Create some Notebook
+6. Do some AI project
  
 
 
-# How to deploy to GCP
-https://medium.com/@dmahugh_70618/deploying-a-flask-app-to-google-app-engine-faa883b5ffab
-* Create a file app.yaml
-* Set the name of the fiel contianing the app function and add that it uses gunicorn
-* Set python as runtime
-* Otheer settings: see example here https://github.com/GoogleCloudPlatform/python-docs-samples/blob/main/appengine/flexible/hello_world/app.yaml
-Enable App Engine in console and follow steps
 
-Whenever you have made updates to your app repo, you can deploy them to google like this 
-gcloud app deploy
 # Locally conenct to sql database
 
 Install needed packages (for mysql)
@@ -103,6 +88,5 @@ This backup can be put back to live an all data within, users and so on will per
 However, the region you have to set again (europe3, Frankfurt) and the IP will de different.
 Update the env variable MYSQL_PUBLIC_IP_ADDRESS with the new IP and run the script again. If you need to update your own Ip Address to the whitelist,
 see here how to do it in the right format https://mxtoolbox.com/subnetcalculator.aspx. 
-I Asked Daniel and for 95.90.232.195, the correct format is
- The IP address you need to add under the SQL instances Connection Part
+
 
