@@ -86,7 +86,7 @@ The database will run up costs even though you turn it off.
 To properly save costs you need to delete it and store it as a backup
 This backup can be put back to live an all data within, users and so on will persist.
 However, the instance ID (course-app) and the region you have to set again (europe3, Frankfurt) and the IP will de different.
-Update the env variable MYSQL_PUBLIC_IP_ADDRESS with the new IP and run the script again. If you need to update your own Ip Address to the whitelist,
+Update the env variable MYSQL_PUBLIC_IP_ADDRESS (in the Secret Manager or locally, depending on how you run the app) with the new IP and run the script again. If you need to update your own Ip Address to the whitelist,
 see here how to do it in the right format https://mxtoolbox.com/subnetcalculator.aspx. 
 
 

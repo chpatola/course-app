@@ -22,8 +22,8 @@ client = secretmanager.SecretManagerServiceClient()
 publisher = pubsub_v1.PublisherClient()
 
 # Define Functions
-def access_secret(project_id, secret_id, version_id=1):
-    """Function to access secrets"""
+def access_secret(project_id, secret_id, version_id="latest"):
+    """Function to access secrets, defaulting to the latest version."""
     name = f"projects/{project_id}/secrets/{secret_id}/versions/{version_id}"
     response = client.access_secret_version(request={"name": name})
     return response.payload.data.decode("UTF-8")
