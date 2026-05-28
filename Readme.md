@@ -58,8 +58,8 @@ docker run  -it -p 5000:5000 course_app`
 
 ## What to do next 
 1. Plan what kind of transformations should be done to the raw data and what technology?
-2. Set up one transformation Job
-3. Create a few different outputports (unique Students, unique courses?, exams?)
+2. Set up one transformation Job (OK)
+3. Create a few different outputports (unique Students, unique courses?, exams?) (OK)
 4. Set up dataplex / Data Catalouge
 5. Create some Notebook
 6. Do some AI project
@@ -85,7 +85,7 @@ Add a row in this file and check if it got there
 The database will run up costs even though you turn it off.
 To properly save costs you need to delete it and store it as a backup
 This backup can be put back to live an all data within, users and so on will persist.
-However, the region you have to set again (europe3, Frankfurt) and the IP will de different.
+However, the instance ID (course-app) and the region you have to set again (europe3, Frankfurt) and the IP will de different.
 Update the env variable MYSQL_PUBLIC_IP_ADDRESS with the new IP and run the script again. If you need to update your own Ip Address to the whitelist,
 see here how to do it in the right format https://mxtoolbox.com/subnetcalculator.aspx. 
 
