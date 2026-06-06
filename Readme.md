@@ -6,6 +6,8 @@ The app is deployed with Docker and run in a Google CLoud Run instance.
 The data from the app is written to a GCP mySQL instance and sent to a pubsub topic. From there, there is a 
 pubsub subscriber that reads the data from the topic and writes it to a GCP BigQuery table.
 
+In Big Query there are Dataform transforms that tidy the data up. There are also big query tables built from google forms.
+
 # How to use this app
 The app can be spinned up locally or hosted in Google Cloud Run.
 
@@ -86,7 +88,7 @@ The database will run up costs even though you turn it off.
 To properly save costs you need to delete it and store it as a backup
 This backup can be put back to live an all data within, users and so on will persist.
 However, the instance ID (course-app) and the region you have to set again (europe3, Frankfurt) and the IP will de different.
-Update the env variable MYSQL_PUBLIC_IP_ADDRESS (in the Secret Manager or locally, depending on how you run the app) with the new IP and run the script again. If you need to update your own Ip Address to the whitelist,
+Update the env variable MYSQL_PUBLIC_IP_ADDRESS (in the Secret Manager or locally, depending on how you run the app) with the new IP and run the script again (or push to GitHUb and the deployment will take place automatically). If you need to update your own Ip Address to the whitelist,
 see here how to do it in the right format https://mxtoolbox.com/subnetcalculator.aspx. 
 
 

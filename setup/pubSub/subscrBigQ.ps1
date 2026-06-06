@@ -6,7 +6,7 @@ gcloud pubsub subscriptions create course-app-sub-bq \
     --drop-unknown-fields \
     --ack-deadline=10 \
     --message-retention-duration=2d \
-    --expiration-period=31d \
+    --expiration-period=300d \
     --dead-letter-topic=course-app-topic-deadletter \
     --max-delivery-attempts=5 \
     --project=etl-test-404717

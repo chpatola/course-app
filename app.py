@@ -1,12 +1,17 @@
 """Module providing a access to local variables"""
 import os
 import json
+import logging
 from datetime import datetime
 from flask import Flask, render_template, request
 from google.cloud.sql.connector import Connector
 from google.cloud import secretmanager
 from google.cloud import pubsub_v1
 import sqlalchemy
+
+# Configure logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 # Only for manual testing of the container
 #CREDENTIAL_PATH = "auth/application_default_credentials.json"
@@ -109,7 +114,12 @@ def enrol():
             )
 
         except Exception as e:
-            return render_template("error.html", title="Error", error_message=e), 500
+            logger.error("Enrollment processing error: %s", e, exc_info=True)
+            return render_template(
+                "error.html",
+                title="Error",
+                error_message="An internal error occurred. Please try again later."
+            ), 500
 
 # This is essential for running the app directly from the script
 if __name__ == "__main__":
