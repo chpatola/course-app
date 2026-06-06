@@ -3,6 +3,25 @@ This is a flask app that hosts a course enrollment site for a traffic school.
 The - very simple - web page save the enrollments to course in a MySQL instance hosted on Google Cloud.
 The app is deployed with Docker and run in a Google CLoud Run instance.
 
+## Architecture Overview
+
+```mermaid
+graph LR
+    User((User)) -->|Form Submission| Flask[Flask App on Cloud Run]
+    subgraph GCP [Google Cloud Platform]
+        Secrets[Secret Manager] -.->|Credentials| Flask
+        Flask -->|Save Data| CloudSQL[(Cloud SQL - MySQL)]
+        Flask -->|Publish Event| PubSub[Pub/Sub Topic]
+        PubSub -->|Subscription| BQ_Raw[BigQuery Raw Table]
+        
+        subgraph Data_Warehouse [BigQuery Data Warehouse]
+            BQ_Raw -->|Dataform Job| BQ_Final[BigQuery Final Tables]
+            GForms[Google Forms Data] --> BQ_Final
+            Hardcoded[Hardcoded Tables] --> BQ_Final
+        end
+    end
+```
+
 The data from the app is written to a GCP mySQL instance and sent to a pubsub topic. From there, there is a 
 pubsub subscriber that reads the data from the topic and writes it to a GCP BigQuery table.
 
@@ -90,5 +109,3 @@ This backup can be put back to live an all data within, users and so on will per
 However, the instance ID (course-app) and the region you have to set again (europe3, Frankfurt) and the IP will de different.
 Update the env variable MYSQL_PUBLIC_IP_ADDRESS (in the Secret Manager or locally, depending on how you run the app) with the new IP and run the script again (or push to GitHUb and the deployment will take place automatically). If you need to update your own Ip Address to the whitelist,
 see here how to do it in the right format https://mxtoolbox.com/subnetcalculator.aspx. 
-
-
